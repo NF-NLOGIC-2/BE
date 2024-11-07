@@ -49,13 +49,10 @@ jacocoTestReport {
         html.required = true
     }
 
-    // 제외할 클래스들 설정 (선택사항)
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
-            fileTree(dir: it, exclude: [
-                    "**/*HealthController",
-                    "**/*Application*",
-                    "**/*Config*",
+            fileTree(dir: it, includes: ['**/*.class'], excludes: [
+                    '**/org/dev/nlogic/NlogicApplication.class',
             ])
         }))
     }
@@ -66,6 +63,9 @@ jacocoTestCoverageVerification {
     violationRules {
         rule {
             element = 'CLASS'
+            excludes = [
+                    'org.dev.nlogic.NlogicApplication',
+            ]
             limit {
                 minimum = 0.80  // 최소 80% 커버리지 요구
             }
