@@ -1,4 +1,4 @@
-name: Dev Branch PR Check
+name: Dev Branch PR Check - CI
 on:
   pull_request:
     branches: [ dev ]
@@ -30,6 +30,3 @@ jobs:
           min-coverage-changed-files: 80
           title: "📝 Jacoco Test Coverage Report"
           update-comment: true
-
-      - name: Build
-        run: ./gradlew clean bootJar
