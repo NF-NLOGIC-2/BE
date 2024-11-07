@@ -1,3 +1,4 @@
+test
 ### Branch Strategy - Git Flow
 
 > BranchType : Description
