@@ -50,7 +50,7 @@ jacocoTestReport {
     }
 
     afterEvaluate {
-        classDirectories.setFrom(files(classDirectories.files.collect {
+        classDirectories.setFrom(files(classDirectories.files.collect {]
             fileTree(dir: it, includes: ['**/*.class'], excludes: [
                     '**/org/dev/nlogic/NlogicApplication.class',
                     '**/org/dev/nlogic/health/HealthController.class'
