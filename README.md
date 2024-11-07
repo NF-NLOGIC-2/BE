@@ -30,3 +30,5 @@
 - cicd(): cicd 관련 내용
 - docs: 문서 관련 작업
 - chore: 그 외 작업
+
+cicd test
