@@ -49,12 +49,15 @@ jacocoTestReport {
         html.required = true
     }
 
-    // 제외할 클래스들 설정 (선택사항)
+    // Report 제외 정보
     afterEvaluate {
         classDirectories.setFrom(files(classDirectories.files.collect {
             fileTree(dir: it, exclude: [
-                    "**/*Application*",
-                    "**/*Config*",
+                    "**/health/**",          // health 패키지 전체 제외
+                    "**/HealthController.*",  // HealthController 클래스 제외
+                    "**/Application.*",       // Application 클래스 제외
+                    "**/config/**",          // config 패키지 전체 제외
+                    "**/*Config.*"           // Config로 끝나는 모든 클래스 제외
             ])
         }))
     }
