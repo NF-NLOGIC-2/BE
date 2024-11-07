@@ -18,5 +18,18 @@ jobs:
           java-version: 21
           distribution: 'corretto'
 
-      - name: Build and Test
-        run: ./gradlew clean test bootJar
+      - name: Test and Generate Coverage Report
+        run: ./gradlew clean test jacocoTestReport
+
+      - name: Add Coverage PR Comment
+        uses: madrapps/jacoco-report@v1.6.1
+        with:
+          paths: ${{ github.workspace }}/build/reports/jacoco/test/jacocoTestReport.xml
+          token: ${{ secrets.ACTION_TOKEN }}
+          min-coverage-overall: 80
+          min-coverage-changed-files: 80
+          title: "📝 Jacoco Test Coverage Report"
+          update-comment: true
+
+      - name: Build
+        run: ./gradlew clean bootJar
