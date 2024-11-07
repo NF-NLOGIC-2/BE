@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.3.5'
     id 'io.spring.dependency-management' version '1.1.6'
+    id 'jacoco'
 }
 
 group = 'org.dev'
@@ -35,4 +36,38 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport  // 테스트 후 Jacoco 리포트 생성
+}
+
+jacoco {
+    toolVersion = "0.8.9"  // Jacoco 버전 지정
+}
+
+jacocoTestReport {
+    reports {
+        xml.required = true
+        html.required = true
+    }
+
+    // 제외할 클래스들 설정 (선택사항)
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+                    "**/*Application*",
+                    "**/*Config*",
+            ])
+        }))
+    }
+}
+
+// 커버리지 체크 규칙
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            element = 'CLASS'
+            limit {
+                minimum = 0.80  // 최소 80% 커버리지 요구
+            }
+        }
+    }
 }
