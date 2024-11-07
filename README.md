@@ -1,5 +1,5 @@
 ### Branch Strategy - Git Flow
-
+testtest
 > BranchType : Description
 
 - main : 배포 브랜치
